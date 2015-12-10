@@ -1,0 +1,20 @@
+{
+  "name": "node-video-server",
+  "version": "0.0.0",
+  "homepage": "https://github.com/rokoala/labs",
+  "authors": [
+    "Rodrigo Koga"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs": "~1.4.8",
+    "materialize": "~0.97.3"
+  }
+}

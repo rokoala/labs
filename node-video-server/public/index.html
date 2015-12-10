@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Videos</title>
+    <script type="text/javascript" src="libs/angularjs/angular.min.js"></script>
+    <script type="text/javascript" src="main.js"></script>
+    <link rel="stylesheet" href="/libs/materialize/dist/css/materialize.min.css">
+  </head>
+  <body ng-app="videoApp">
+    <div class="card black">
+      <video id="myVideo" width="100%" height="400" autoplay controls>
+        <source id="mp4_src" src="" type="video/mp4">
+        <source id="ogg_src" src="" type="video/ogg">
+        Your browser does not support the video tag.
+        <track label="English" kind="subtitles" srclang="en" id="subtitle_src" src="" default>
+      </video>
+    </div>
+    <section ng-controller="LibraryController as lib">
+      <table class="table">
+        <tr>
+          <th>Nome</th>
+          <th>Opções</th>
+        </tr>
+        <tr ng-repeat="video in lib.videos">
+          <td>
+            {{video.name}}
+          </td>
+          <td>
+            <button class="btn" type="button" name="play" ng-click="lib.play(video)">Play</button>
+          </td>
+        </tr>
+      </table>
+    </section>
+  </body>
+<button onclick="myFunction()" type="button">Change Video</button><br>
+</html>

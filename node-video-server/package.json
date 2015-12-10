@@ -1,0 +1,15 @@
+{
+  "name": "node-video-server",
+  "version": "1.0.0",
+  "description": "A simple video server",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rodrigo Koga",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
