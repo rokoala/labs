@@ -1,0 +1,21 @@
+{
+  "name": "facebook-authentication",
+  "version": "0.0.0",
+  "homepage": "https://github.com/rokoala/labs",
+  "authors": [
+    "Rodrigo Koga"
+  ],
+  "description": "facebook authentication test",
+  "main": "main.js",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angularjs": "~1.5.0"
+  }
+}
