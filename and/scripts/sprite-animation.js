@@ -11,23 +11,71 @@ var KJS = KJS || {};
     this.x = options.x || 0;
     this.y = options.y || 0;
     this.image = options.image;
-    this.xFrame = options.xFrame || 0;
-    this.yFrame = options.yFrame || 0;
-    this.nFrames = options.nFrames || 0;
+    this.nxFrames = options.nxFrames || 1;
+    this.nyFrames = options.nyFrames || 1;
     this.idleTime = options.idleTime || 4;
     this.height = options.height || 0;
     this.width = options.width || 1;
+
+    // counter to control the frame rate that depends on options.idleTime
     this._count = 0;
-    this._currentFrameIndex = 0;
+
+    // amount of frames to display
+    this.amount = options.amount || null;
+
+    // controls the number of frames to display
+    this._currentAmount = 1;
+
+    // register the initial index position of sprite
+    this._initFrameIndex = {
+      x: options.xFrame || 0,
+      y: options.yFrame || 0
+    };
+
+    // controls current index position of sprite
+    this._currentFrameIndex = {
+      x: options.xFrame || 0,
+      y: options.yFrame || 0
+    };
+
   };
+
+  SpriteAnimation.prototype._updateframeIndex = function(){
+    // increases current frame index in x axis
+    if (this._currentFrameIndex.x < this.nxFrames - 1) {
+      this._currentFrameIndex.x += 1;
+    } else {
+      this._currentFrameIndex.x = this._initFrameIndex.x;
+
+      // increases current frame index in y axis
+      if (this.nyFrames > 1) {
+        if (this._currentFrameIndex.y < this.nyFrames - 1) {
+          this._currentFrameIndex.y += 1;
+        } else {
+          this._currentFrameIndex.y = this._initFrameIndex.y;
+        }
+      }
+    }
+  }
 
   SpriteAnimation.prototype._update = function() {
     this._count += 1;
     // check if count is bellow idleTime
     if (this._count > this.idleTime) {
       this._count = 0;
-      // increases current frame index
-      this._currentFrameIndex = (this._currentFrameIndex < this.nFrames - 1) ? this._currentFrameIndex + 1 : 0;
+
+      if(!!this.amount){
+        if (this._currentAmount < this.amount) {
+          this._currentAmount += 1;
+          this._updateframeIndex();
+        }else{
+          this._currentAmount = 1;
+          this._currentFrameIndex.x = this._initFrameIndex.x;
+          this._currentFrameIndex.y = this._initFrameIndex.y;
+        }
+      }else{
+        this._updateframeIndex();
+      }
     }
   };
 
@@ -35,14 +83,14 @@ var KJS = KJS || {};
 
     this.context.drawImage(
       this.image,
-      this._currentFrameIndex * this.width / this.nFrames,
-      0,
-      this.width / this.nFrames,
-      this.height,
+      this._currentFrameIndex.x * this.width / this.nxFrames,
+      this._currentFrameIndex.y * this.height / this.nyFrames,
+      this.width / this.nxFrames,
+      this.height / this.nyFrames,
       x,
       y,
-      this.width / this.nFrames,
-      this.height
+      this.width / this.nxFrames,
+      this.height / this.nyFrames
     );
   };
 
