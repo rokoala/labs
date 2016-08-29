@@ -3,9 +3,16 @@
   <head>
     <meta charset="utf-8">
     <script src='scripts/sprite-animation.js'></script>
+    <script src='scripts/element.js'></script>
+    <script src='scripts/movableElement.js'></script>
+    <script src='scripts/staticElement.js'></script>
+    <script src='scripts/keyboard.js'></script>
+</script>
+    <link rel="stylesheet" href="main.css">
   </head>
   <body>
-    <canvas id="myCanvas"></canvas>
+    <canvas style="z-index:1" id="background"></canvas>
+    <canvas style="z-index:2" id="myCanvas"></canvas>
     <script src='scripts/main.js'></script>
   </body>
 </html>

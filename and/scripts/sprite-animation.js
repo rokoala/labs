@@ -38,6 +38,8 @@ var KJS = KJS || {};
       y: options.yFrame || 0
     };
 
+    this._lastX = this.x;
+    this._lastY = this.y;
   };
 
   SpriteAnimation.prototype._updateframeIndex = function(){
@@ -80,7 +82,9 @@ var KJS = KJS || {};
   };
 
   SpriteAnimation.prototype._render = function(x, y) {
-
+    this._lastX = x;
+    this._lastY = y;
+    
     this.context.drawImage(
       this.image,
       this._currentFrameIndex.x * this.width / this.nxFrames,
@@ -94,8 +98,8 @@ var KJS = KJS || {};
     );
   };
 
-  SpriteAnimation.prototype.erase = function(x, y) {
-    this.context.clearRect(x, y, this.width, this.height);
+  SpriteAnimation.prototype.erase = function() {
+    this.context.clearRect(this._lastX, this._lastY, this.width, this.height);
   };
 
   SpriteAnimation.prototype.draw = function(x, y) {
