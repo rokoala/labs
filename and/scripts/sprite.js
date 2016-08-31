@@ -3,9 +3,9 @@ var KJS = KJS || {};
 (function(win) {
   'use strict';
 
-  var SpriteAnimation = function(options) {
+  var Sprite = function(options) {
     if (!options)
-      throw new Error('SpriteAnimation(x,y,options) : Please set SpriteAnimation options');
+      throw new Error('Sprite(x,y,options) : Please set Sprite options');
 
     this.context = options.context;
     this.x = options.x || 0;
@@ -42,7 +42,7 @@ var KJS = KJS || {};
     this._lastY = this.y;
   };
 
-  SpriteAnimation.prototype._updateframeIndex = function(){
+  Sprite.prototype._updateframeIndex = function(){
     // increases current frame index in x axis
     if (this._currentFrameIndex.x < this.nxFrames - 1) {
       this._currentFrameIndex.x += 1;
@@ -60,7 +60,7 @@ var KJS = KJS || {};
     }
   }
 
-  SpriteAnimation.prototype._update = function() {
+  Sprite.prototype._update = function() {
     this._count += 1;
     // check if count is bellow idleTime
     if (this._count > this.idleTime) {
@@ -81,10 +81,10 @@ var KJS = KJS || {};
     }
   };
 
-  SpriteAnimation.prototype._render = function(x, y) {
+  Sprite.prototype._render = function(x, y) {
     this._lastX = x;
     this._lastY = y;
-    
+
     this.context.drawImage(
       this.image,
       this._currentFrameIndex.x * this.width / this.nxFrames,
@@ -98,15 +98,15 @@ var KJS = KJS || {};
     );
   };
 
-  SpriteAnimation.prototype.erase = function() {
+  Sprite.prototype.erase = function() {
     this.context.clearRect(this._lastX, this._lastY, this.width, this.height);
   };
 
-  SpriteAnimation.prototype.draw = function(x, y) {
+  Sprite.prototype.draw = function(x, y) {
     this._update();
     this._render(x || this.x, y || this.y);
   };
 
-  win.KJS.SpriteAnimation = SpriteAnimation;
+  win.KJS.Sprite = Sprite;
 
 })(window);

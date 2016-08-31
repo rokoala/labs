@@ -2,6 +2,14 @@ canvas{
   position: absolute;
 }
 
+video{
+  z-index: -1;
+  position: absolute;
+}
+canvas{
+  z-index: 2;
+}
+
 body{
   margin: 0;
 }
